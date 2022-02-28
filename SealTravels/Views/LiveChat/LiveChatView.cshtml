@@ -1,0 +1,72 @@
+@model SealTravels.Models.LiveChatModel
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" />
+    <link href="~/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/bootstrap-chat.css" rel="stylesheet" />
+
+</head>
+
+<body style="font-family:Heebo">
+
+    <div class="container py-4">
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h4 style="font-weight:bold;color:#4e73df">SEAL TRAVELS - Live Chat Room</h4>
+                <form action="#" class="bg-light">
+                    <div class="input-group">
+                        <input id="message" type="text" placeholder="Type your message" class="form-control rounded-0 border-0 py-4">
+                        <div class="input-group-append">
+                            <input id="sendmessage" type="submit" class="btn btn-primary" value="Send" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <input type="hidden" id="displayname" />
+            <div class="chat-box px-4 py-3" id="discussion" style="height:450px;"></div>
+        </div>
+    </div>
+
+    @section scripts {
+        <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+        <script src="~/signalr/hubs"></script>
+        <script>
+            $(function () {
+                var chat = $.connection.chatHub;
+                chat.client.addNewMessageToPage = function (name, message) {
+                    $('#discussion').append('<div class="media w-50 mb-3"> <div class="media-body"> <div class="bg-primary rounded py-2 px-3 mb-2"> <p class="text-small text-white">' + htmlEncode(message) + '</p> </div> <p class="small text-muted text-uppercase"><b>' + htmlEncode(name) + '</b> @DateTime.Now</p> </div> </div>'
+                    );
+                };
+                $('#displayname').val(prompt('Enter your name:', ''));
+                $('#message').focus();
+                $.connection.hub.start().done(function () {
+                    $('#sendmessage').click(function () {
+                        chat.server.send($('#displayname').val(), $('#message').val());
+                        $('#message').val('').focus();
+                    });
+                });
+            });
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            }
+        </script>
+    }
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,131 @@
+@model SealTravels.Models.FlightsModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Generate Flight Tickets</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" />
+    <link href="~/Assets/img/globe.png" rel="icon" />
+    
+
+</head>
+<body style="background-image:url()">
+
+    <div style="height:280px; width:900px; margin-left:200px; margin-top:150px; border:1px solid">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div>
+
+                <div style="height:40px; background-color:#4e73df; width:900px">
+
+                    @*Title*@
+                    <div style="float:left; margin-top:8px; background-color:#4e73df">
+                        <label style="font-family:Heebo; color:white; font-weight:bold; font-size:18px; margin-left:30px">SEAL TRAVELS</label>
+                        <label style="font-family:Heebo; color:white; font-size:15px">Flight Ticket</label>
+                    </div>
+
+                    @*Name*@
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "PASSENGER NAME", @style = "background-color:#4e73df; color:white; font-size:20px; width:200px; font-family:Heebo; border:none; margin-left:645px; font-weight:500; text-align:center; margin-top:-30px" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                </div>
+            </div><br /><br />
+
+            @*Flight Number*@
+            <div style="float:left; margin-left:30px">
+                @Html.LabelFor(model => model.FlightNumber, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.FlightNumber, new { htmlAttributes = new { @placeholder = "Flight Number", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.FlightNumber, "", new { @class = "text-danger" })
+            </div>
+
+            @*Travel Class*@
+            <div>
+                @Html.LabelFor(model => model.TravelClass, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.TravelClass, new { htmlAttributes = new { @placeholder = "Travel Class", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.TravelClass, "", new { @class = "text-danger" })
+            </div>
+
+            @*Check-in Opens*@
+            <div style="float:left; margin-left:30px">
+                @Html.LabelFor(model => model.CheckinOpens, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.CheckinOpens, new { htmlAttributes = new { @placeholder = "Date, Time", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.CheckinOpens, "", new { @class = "text-danger" })
+            </div>
+
+            @*Status*@
+            <div>
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @placeholder = "Status", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+
+            @*Departure*@
+            <div style="float:left; margin-left:30px">
+                @Html.LabelFor(model => model.Departure, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @placeholder = "Date, Time", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.Departure, "", new { @class = "text-danger" })
+            </div>
+
+            @*Arrival*@
+            <div>
+                @Html.LabelFor(model => model.Arrival, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                @Html.EditorFor(model => model.Arrival, new { htmlAttributes = new { @placeholder = "Date, Time", @style = "font-family:Heebo; background-color:transparent; border:none; font-size:13px" } })<br /><br />
+                @Html.ValidationMessageFor(model => model.Arrival, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div style="margin-left:400px; margin-top:-180px">
+                @*Departing From*@
+                <div>
+                    @Html.LabelFor(model => model.DepartingFrom, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                    @Html.EditorFor(model => model.DepartingFrom, new { htmlAttributes = new { @placeholder = "CITY", @style = "width:100px; background-color:transparent; font-weight:bold; font-family:Heebo; border:none; font-size:20px" } })<br />
+                    @Html.ValidationMessageFor(model => model.DepartingFrom, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.DepartureAirportandTerminal, new { htmlAttributes = new { @placeholder = "Airport: Terminal", @style = "width:200px; background-color:transparent; font-family:Heebo; border:none; font-size:13px" } })<br /><br />
+                    @Html.ValidationMessageFor(model => model.DepartureAirportandTerminal, "", new { @class = "text-danger" })
+                </div>
+
+                @*ArrivingAt*@
+                <div>
+                    @Html.LabelFor(model => model.ArrivingAt, htmlAttributes: new { @style = "font-size:15px; font-family:Heebo; font-weight:bold; color:#4e73df" })<br />
+                    @Html.EditorFor(model => model.ArrivingAt, new { htmlAttributes = new { @placeholder = "CITY", @style = "width:100px; background-color:transparent; font-weight:bold; font-family:Heebo; border:none; font-size:20px" } })<br />
+                    @Html.ValidationMessageFor(model => model.ArrivingAt, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.ArrivalAirportandTerminal, new { htmlAttributes = new { @placeholder = "Airport: Terminal", @style = "width:200px; background-color:transparent; font-family:Heebo; border:none; font-size:13px" } })<br /><br />
+                    @Html.ValidationMessageFor(model => model.ArrivalAirportandTerminal, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+
+            @*Barcode*@
+            <div style="margin-left:600px; margin-top:-120px">
+                <img src="@Url.Action("RenderBarcode", "Flight", new { barcode = "" })" />
+            </div><br />
+
+            @*Ticket Validity*@
+            <div style="margin-left:200px; margin-top:40px">
+                @Html.LabelFor(model => model.TicketValidity, htmlAttributes: new { @style = "font-size:15px; text-align:center; font-family:Heebo; font-weight:bold; color:#4e73df" })
+                @Html.EditorFor(model => model.TicketValidity, new { htmlAttributes = new { @placeholder = "not before Date / not after Date", @style = "font-size:13px; background-color:transparent; width:300px; border:none; font-family:Heebo" } })
+                @Html.ValidationMessageFor(model => model.TicketValidity, "", new { @class = "text-danger" })
+            </div><br /><br /><br />
+
+            @*Generate Tickets*@
+            <div>
+                <input class="" type="submit" value="Save Changes" style="font-family:Heebo; margin-left:350px" />
+            </div>
+
+        }
+
+    </div>
+    <br /><br /><br /><br /><br /><br /><br />
+
+</body>
+</html>

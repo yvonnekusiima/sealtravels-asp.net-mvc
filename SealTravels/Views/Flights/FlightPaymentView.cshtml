@@ -1,0 +1,148 @@
+@model SealTravels.Models.FlightsModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>Flight Payment</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" />
+    <link href="~/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/Assets/img/globe.png" rel="icon" />
+
+</head>
+
+<body style="font-weight:600; font-family:Heebo; font-size:13px">
+
+    <!-- Begin Page Content -->
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-2">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-gradient-primary">
+                            <h1 style="font-weight:700; margin-left:100px; margin-top:180px; color:white">Seal Travels <i class="fa fa-globe-americas"></i></h1>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="">
+                                    <h4 class="" style="color:#4e73df; font-family:Heebo"><strong>Payment Information</strong> <i class="fa fa-credit-card"></i></h4><br />
+                                </div>
+                                <!--Payment Information Form-->
+                                <form class="user">
+
+                                    <div class="form-group row">
+                                        <!--Name-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "", @style = "width: 150px;color: #4e73df;font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @required = "required", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <!--Email-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "", @style = "width: 150px;color: #4e73df;font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", @required = "required", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        @*Payment Method*@
+                                        <div class="form-group">
+
+                                            <div class="form-check float-left" style="width: 100px; margin-left: 0px; color: #4e73df; font-weight: bold;">
+                                                @Html.RadioButtonFor(model => model.PaymentMethod, "Visa Card", new { htmlAttributes = new { @class = "form-check-input", @type = "radio", @style = "font-family:Heebo; background-color:transparent; font-size:13px" } }) Visa Card
+                                            </div>
+                                            <div class="form-check float-left" style="width: 160px; color: #4e73df; font-weight: bold;">
+                                                @Html.RadioButtonFor(model => model.PaymentMethod, "American Express", new { htmlAttributes = new { @class = "form-check-input", @type = "radio", @style = "font-family:Heebo; background-color:transparent; font-size:13px" } }) American Express
+                                            </div>
+                                            <div class="form-check float-left" style="width: 150px; color: #4e73df; font-weight: bold;">
+                                                @Html.RadioButtonFor(model => model.PaymentMethod, "Master Card", new { htmlAttributes = new { @class = "form-check-input", @type = "radio", @style = "font-family:Heebo; background-color:transparent; font-size:13px" } }) Master Card
+                                            </div>
+
+                                            @Html.ValidationMessageFor(model => model.PaymentMethod, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Card Number-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "", @style = "width: 150px;color: #4e73df;font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Number", @required = "required", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <!--CVV-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.CVV, htmlAttributes: new { @class = "", @style = "width: 150px;color: #4e73df;font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.CVV, new { htmlAttributes = new { @class = "form-control", @placeholder = "CVV", @type = "password", @required = "required", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.CVV, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <!--Expiry Date-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "", @style = "width: 150px; color: #4e73df; font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date", @required = "required", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <!--Amount-->
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "", @style = "width: 150px;color: #4e73df;font-weight: bold;font-size: 13px;" })
+                                            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Amount", @style = "font-size: 13px" } })
+                                            @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <!--Submit-->
+                                    <div>
+                                        <input type="submit" value="SUBMIT PAYMENT" class="btn btn-primary btn-block" style="font-size: 13px; font-weight:600" />
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <!-- End of Main Content -->
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script></span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+
+    <script src="~/Assets/js/jquery.min.js"></script>
+    <script src="~/Assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/Assets/js/sb-admin-2.min.js"></script>
+
+</body>
+</html>

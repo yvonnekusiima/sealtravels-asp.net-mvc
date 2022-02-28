@@ -1,0 +1,98 @@
+﻿@model SealTravels.Models.UsersModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+    <title>User Login</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" />
+    <link href="~/Assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/Assets/img/globe.png" rel="icon" />
+
+</head>
+
+<body style="font-family:Heebo">
+
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <div class="card o-hidden border-0 shadow-lg my-2">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-gradient-primary">
+                            <h1 style="font-weight:700; margin-left:100px; margin-top:180px; color:white">Seal Travels <i class="fa fa-globe-americas"></i></h1>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="">
+                                    <h5 class="" style="color:#4e73df; font-family:Heebo"><strong>User Login</strong> <i class="fa fa-sign-in-alt"></i></h5><br />
+                                </div>
+                                <form class="user">
+                                    <div class="form-group ">
+                                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @required = "required", @placeholder = "Username", @style = "font-size:13px" } })
+                                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "password", @placeholder = "Password", @style = "font-size:13px" } })
+                                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="form-group" style="margin-top:0px">
+                                        <img src="@Url.Action("UserCaptchaView", "Users")" />
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.Captcha, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "text", @placeholder = "Enter Captcha Code", @style = "font-size:13px" } })
+                                        @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div>
+                                        <input type="submit" value="LOGIN" class="btn btn-primary btn-block" style="font-size:13px; font-weight:bold" />
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script></span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+        <script src="~/Assets/js/jquery.min.js"></script>
+        <script src="~/Assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/Assets/vendor/jquery/jquery.min.js"></script>
+        <script src="~/Assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="~/Assets/js/sb-admin-2.min.js"></script>
+
+    }
+
+</body>
+
+</html>
